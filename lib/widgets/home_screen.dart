@@ -142,8 +142,14 @@ class _HomePageState extends State<HomePage> {
             result = '';
           });
         },
-        icon: const Icon(Icons.replay),
-        label: const Text('Repeat the game'),
+        icon: const Icon(
+          Icons.replay,
+          color: Colors.white,
+        ),
+        label: const Text(
+          'Repeat the game',
+          style: TextStyle(color: Colors.white),
+        ),
         style: ButtonStyle(
           backgroundColor:
               MaterialStateProperty.all(Theme.of(context).splashColor),
