@@ -65,124 +65,57 @@ class Game {
       return;
     }
 
-//start - center
-    if (Player.playerO.containsAll(0, 1) && emptyCells.contains(2)) {
-      index = 2;
-    } else if (Player.playerO.containsAll(3, 4) && emptyCells.contains(5)) {
-      index = 5;
-    } else if (Player.playerO.containsAll(6, 7) && emptyCells.contains(8)) {
-      index = 8;
-    } else if (Player.playerO.containsAll(0, 3) && emptyCells.contains(6)) {
-      index = 6;
-    } else if (Player.playerO.containsAll(1, 4) && emptyCells.contains(7)) {
-      index = 7;
-    } else if (Player.playerO.containsAll(2, 5) && emptyCells.contains(8)) {
-      index = 8;
-    } else if (Player.playerO.containsAll(0, 4) && emptyCells.contains(8)) {
-      index = 8;
-    } else if (Player.playerO.containsAll(2, 4) && emptyCells.contains(6)) {
-      index = 6;
+    // Smart Moves
+    String opponent = activePlayer == 'X' ? 'O' : 'X';
+    index = findWinningMove(activePlayer, emptyCells);
+    if (index == -1) {
+      index = findWinningMove(opponent, emptyCells);
     }
-    //start - end
-
-    if (Player.playerO.containsAll(0, 2) && emptyCells.contains(1)) {
-      index = 1;
-    } else if (Player.playerO.containsAll(3, 5) && emptyCells.contains(4)) {
-      index = 4;
-    } else if (Player.playerO.containsAll(6, 8) && emptyCells.contains(7)) {
-      index = 7;
-    } else if (Player.playerO.containsAll(0, 6) && emptyCells.contains(3)) {
-      index = 3;
-    } else if (Player.playerO.containsAll(1, 7) && emptyCells.contains(4)) {
-      index = 4;
-    } else if (Player.playerO.containsAll(2, 8) && emptyCells.contains(5)) {
-      index = 5;
-    } else if (Player.playerO.containsAll(0, 8) && emptyCells.contains(4)) {
-      index = 4;
-    } else if (Player.playerO.containsAll(2, 6) && emptyCells.contains(4)) {
-      index = 4;
+    if (index == -1) {
+      index = findCenter(emptyCells);
     }
-
-    //center - end
-    if (Player.playerO.containsAll(1, 2) && emptyCells.contains(0)) {
-      index = 0;
-    } else if (Player.playerO.containsAll(4, 5) && emptyCells.contains(3)) {
-      index = 3;
-    } else if (Player.playerO.containsAll(7, 8) && emptyCells.contains(6)) {
-      index = 6;
-    } else if (Player.playerO.containsAll(3, 6) && emptyCells.contains(0)) {
-      index = 0;
-    } else if (Player.playerO.containsAll(4, 7) && emptyCells.contains(1)) {
-      index = 1;
-    } else if (Player.playerO.containsAll(5, 8) && emptyCells.contains(2)) {
-      index = 2;
-    } else if (Player.playerO.containsAll(4, 8) && emptyCells.contains(0)) {
-      index = 0;
-    } else if (Player.playerO.containsAll(4, 6) && emptyCells.contains(2)) {
-      index = 2;
-    }
-
-//start - center
-    if (Player.playerX.containsAll(0, 1) && emptyCells.contains(2)) {
-      index = 2;
-    } else if (Player.playerX.containsAll(3, 4) && emptyCells.contains(5)) {
-      index = 5;
-    } else if (Player.playerX.containsAll(6, 7) && emptyCells.contains(8)) {
-      index = 8;
-    } else if (Player.playerX.containsAll(0, 3) && emptyCells.contains(6)) {
-      index = 6;
-    } else if (Player.playerX.containsAll(1, 4) && emptyCells.contains(7)) {
-      index = 7;
-    } else if (Player.playerX.containsAll(2, 5) && emptyCells.contains(8)) {
-      index = 8;
-    } else if (Player.playerX.containsAll(0, 4) && emptyCells.contains(8)) {
-      index = 8;
-    } else if (Player.playerX.containsAll(2, 4) && emptyCells.contains(6)) {
-      index = 6;
-    }
-    //start - end
-
-    if (Player.playerX.containsAll(0, 2) && emptyCells.contains(1)) {
-      index = 1;
-    } else if (Player.playerX.containsAll(3, 5) && emptyCells.contains(4)) {
-      index = 4;
-    } else if (Player.playerX.containsAll(6, 8) && emptyCells.contains(7)) {
-      index = 7;
-    } else if (Player.playerX.containsAll(0, 6) && emptyCells.contains(3)) {
-      index = 3;
-    } else if (Player.playerX.containsAll(1, 7) && emptyCells.contains(4)) {
-      index = 4;
-    } else if (Player.playerX.containsAll(2, 8) && emptyCells.contains(5)) {
-      index = 5;
-    } else if (Player.playerX.containsAll(0, 8) && emptyCells.contains(4)) {
-      index = 4;
-    } else if (Player.playerX.containsAll(2, 6) && emptyCells.contains(4)) {
-      index = 4;
-    }
-
-    //center - end
-    if (Player.playerX.containsAll(1, 2) && emptyCells.contains(0)) {
-      index = 0;
-    } else if (Player.playerX.containsAll(4, 5) && emptyCells.contains(3)) {
-      index = 3;
-    } else if (Player.playerX.containsAll(7, 8) && emptyCells.contains(6)) {
-      index = 6;
-    } else if (Player.playerX.containsAll(3, 6) && emptyCells.contains(0)) {
-      index = 0;
-    } else if (Player.playerX.containsAll(4, 7) && emptyCells.contains(1)) {
-      index = 1;
-    } else if (Player.playerX.containsAll(5, 8) && emptyCells.contains(2)) {
-      index = 2;
-    } else if (Player.playerX.containsAll(4, 8) && emptyCells.contains(0)) {
-      index = 0;
-    } else if (Player.playerX.containsAll(4, 6) && emptyCells.contains(2)) {
-      index = 2;
-    } else {
-      Random random = Random();
-      int randomIndex = random.nextInt(emptyCells.length);
-      index = emptyCells[randomIndex];
+    if (index == -1) {
+      index = findRandom(emptyCells);
     }
 
     playGame(index, activePlayer);
+  }
+
+  int findWinningMove(String player, List<int> emptyCells) {
+    List<List<int>> winCombinations = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+      [0, 4, 8], [2, 4, 6] 
+    ];
+
+    for (var combination in winCombinations) {
+      int count = 0;
+      int emptyIndex = -1;
+      for (var index in combination) {
+        if (Player.playerX.contains(index) && player == 'X') {
+          count++;
+        } else if (Player.playerO.contains(index) && player == 'O') {
+          count++;
+        } else {
+          emptyIndex = index;
+        }
+      }
+      if (count == 2 && emptyIndex != -1 && emptyCells.contains(emptyIndex)) {
+        return emptyIndex;
+      }
+    }
+    return -1;
+  }
+
+  int findCenter(List<int> emptyCells) {
+    if (emptyCells.contains(4)) {
+      return 4; 
+    }
+    return -1;
+  }
+
+  int findRandom(List<int> emptyCells) {
+    Random random = Random();
+    return emptyCells[random.nextInt(emptyCells.length)];
   }
 }

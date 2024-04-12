@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
   Expanded _expanded(BuildContext context) {
     return Expanded(
       child: GridView.count(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(25),
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         childAspectRatio: 1,
@@ -204,23 +204,57 @@ class _HomePageState extends State<HomePage> {
 
   Color _getSquareColor(int index, BuildContext context) {
     String winner = game.checkWinner();
-    if (winner == 'X' && Player.playerX.contains(index)) {
-      return Colors.yellowAccent.withOpacity(0.5);
-    } else if (winner == 'O' && Player.playerO.contains(index)) {
-      return Colors.yellowAccent.withOpacity(0.5);
-    } else {
-      return Theme.of(context).shadowColor;
+    if (winner.isNotEmpty && gameOver) {
+      List<List<int>> winCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      for (var combination in winCombinations) {
+        if (combination.contains(index)) {
+          if ((winner == 'X' &&
+                  combination.every((i) => Player.playerX.contains(i))) ||
+              (winner == 'O' &&
+                  combination.every((i) => Player.playerO.contains(i)))) {
+            return Colors.yellowAccent.withOpacity(0.5);
+          }
+        }
+      }
     }
+    return Theme.of(context).shadowColor;
   }
 
   Color _getShadowColor(int index, BuildContext context) {
     String winner = game.checkWinner();
-    if (winner == 'X' && Player.playerX.contains(index)) {
-      return Colors.yellowAccent;
-    } else if (winner == 'O' && Player.playerO.contains(index)) {
-      return Colors.yellowAccent;
-    } else {
-      return Colors.transparent;
+    if (winner.isNotEmpty && gameOver) {
+      List<List<int>> winCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      for (var combination in winCombinations) {
+        if (combination.contains(index)) {
+          if ((winner == 'X' &&
+                  combination.every((i) => Player.playerX.contains(i))) ||
+              (winner == 'O' &&
+                  combination.every((i) => Player.playerO.contains(i)))) {
+            return Colors.yellowAccent;
+          }
+        }
+      }
     }
+    return Colors.transparent;
   }
 }
